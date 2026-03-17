@@ -1,44 +1,47 @@
-# 🏦 Bank CLI (JDBC CRUD & Transactions)
+# Bank Management CLI
 
-A terminal-based Banking Management System built with **Java 17**, using **JDBC** for **MySQL** persistence. This project demonstrates mastery of backend fundamentals, separation of concerns (DAO pattern), robust error handling, and data integrity.
+A terminal-based banking system built with Java 17 and pure JDBC,
+demonstrating backend fundamentals without ORM abstraction.
 
-## 🛠️ Technologies & Concepts
-* **Language:** Java 17 (Features: Switch Expressions, Optionals, Text Blocks).
-* **Database:** MySQL 8.0 with integrity constraints (`UNIQUE`, `CHECK`, `FOREIGN KEY`).
-* **Persistence:** Pure JDBC for full control over transactions and queries.
-* **Architecture:** DAO (Data Access Object) pattern for data layer isolation.
+![Java](https://img.shields.io/badge/Java-17-orange)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-blue)
+![JDBC](https://img.shields.io/badge/Persistence-JDBC-green)
 
----
+## Technologies & Concepts
 
-## 🚀 Key Features
-
-### 👤 Customer Management (`CustomerMenu`)
-* **Full CRUD Flow:** Listing, individual search, creation, and updates.
-* **Soft Delete:** Professional implementation where customers are deactivated (`active = false`) instead of deleted, preserving financial history.
-* **Data Security:** Email validation (format and uniqueness) with `SQLIntegrityConstraintViolationException` handling.
-
-### 💸 Financial Operations (`TransactionMenu`)
-* **Deposits & Withdrawals:** Centralized processing with strict balance validation.
-* **Database Logic (SQL):** Dynamic balance calculation using `SUM` with `CASE WHEN` directly in the query for performance optimization.
-* **Detailed Statements:** Transaction history filtered by customer and sorted chronologically.
+- **Language:** Java 17 (Switch Expressions, Optionals, Text Blocks)
+- **Database:** MySQL 8.0 with integrity constraints (`UNIQUE`, `CHECK`, `FOREIGN KEY`)
+- **Persistence:** Pure JDBC for full control over transactions and queries
+- **Architecture:** DAO (Data Access Object) pattern for data layer isolation
 
 ---
 
-## 💎 Technical Highlights
+## Key Features
 
-* **Null-Safe:** Systematic use of `Optional<Customer>` for lookups, eliminating `NullPointerException` risks.
-* **CLI UX:** ANSI escape codes for screen clearing (`clearScreen`), providing a fluid and professional navigation.
-* **Layered Validation:** Business rules verified both in Java code and via Database Constraints.
-* **Security:** Environment variables for database credentials, following Twelve-Factor App best practices.
+### Customer Management
+
+- **Full CRUD Flow:** Listing, individual search, creation and updates
+- **Soft Delete:** Customers are deactivated (`active = false`) instead of deleted, preserving financial history
+- **Data Security:** Email validation with `SQLIntegrityConstraintViolationException` handling
+
+### Financial Operations
+
+- **Deposits & Withdrawals:** Centralized processing with strict balance validation
+- **Database Logic:** Dynamic balance calculation using `SUM` with `CASE WHEN` directly in SQL for performance
+- **Statements:** Transaction history filtered by customer and sorted chronologically
 
 ---
 
-## 🗄️ Data Model
+## Technical Highlights
 
+- **Null-Safe:** Systematic use of `Optional<Customer>` for lookups, eliminating `NullPointerException` risks
+- **Layered Validation:** Business rules verified both in Java and via database constraints
+- **Security:** Environment variables for database credentials following Twelve-Factor App best practices
 
+---
 
+## Data Model
 ```sql
--- Core table structures and constraints
 CREATE TABLE customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -58,19 +61,18 @@ CREATE TABLE transactions (
 
 ---
 
-## ⚙️ How to Run
+## How to Run
 
 ### 1. Database Setup
-Execute the SQL script above in your MySQL instance to create the `bank_cli` database and tables.
+
+Execute the SQL script above in your MySQL instance.
 
 ### 2. Environment Variables
-Set the following environment variables on your system or IDE:
 
-- **DB_URL**: Connection string (e.g., `jdbc:mysql://localhost:3306/bank_cli`)
-- **DB_USER**: Your MySQL username
-- **DB_PASSWORD**: Your MySQL password
+- `DB_URL` — connection string (e.g., `jdbc:mysql://localhost:3306/bank_cli`)
+- `DB_USER` — your MySQL username
+- `DB_PASSWORD` — your MySQL password
 
 ### 3. Execution
-- Compile the project using your preferred IDE (IntelliJ / VS Code) or via terminal
-- Run the `Main.java` class
-- Use the numeric keyboard to navigate through the menus
+
+Run the `Main.java` class via your preferred IDE or terminal and navigate using the numeric keyboard.
